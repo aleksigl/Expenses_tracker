@@ -1,0 +1,18 @@
+[
+    {
+        "expense_name": "doggo's medication",
+        "category": "doggo",
+        "price": 400,
+        "account": "common",
+        "date": "2025-03-05",
+        "comment": "300 - injection"
+    },
+    {
+        "expense_name": "bike repair",
+        "category": "hobbies",
+        "price": 70,
+        "account": "wifeys",
+        "date": "2025-03-04",
+        "comment": ""
+    }
+]

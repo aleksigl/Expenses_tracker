@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Household expenses tracker</title>
+    <style>
+        table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+        th, td {
+        padding: 8px;
+        text-align: left;
+    }
+        th {
+        background-color: #f2f2f2;
+    }
+        tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    </style>
+</head>
+
+<h2>Expenses so far</h2>
+
+<table>
+    <thead>
+    <th>What did we have to pay for?</th>
+    <th>What was the category of the expense?</th>
+    <th>How much was spent?</th>
+    <th>Whose account was debited?</th>
+    <th>When did we spend the money?</th>
+    <th>Any comments?</th>
+    </thead>
+
+    {% for expense in expenses %}
+    <tr>
+
+        <td><a href="/expenses/{{ loop.index }}">{{ expense.expense_name }}</a></td>
+        <td>{{ expense.category }}</td>
+        <td>{{ expense.price }}</td>
+        <td>{{ expense.account }}</td>
+        <td>{{ expense.date }}</td>
+        <td>{{ expense.comment }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('delete_expense', expense_id=loop.index0 + 1) }}">
+            <input type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+            </form>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+<div>
+    <h2> Add new expense: </h2>
+    <form method="POST" action="/expenses/">
+        {{ form.hidden_tag() }}
+        <table>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            <tr>
+                <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                <td>{{ field }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Add">
+    </form>
+</div>
+</body>
+</html>
