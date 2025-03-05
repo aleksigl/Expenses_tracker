@@ -66,4 +66,5 @@ class Expenses:
         except IndexError:
             raise ValueError(f"Expense with ID {id} does not exist.")
 
+
 expenses = Expenses()
